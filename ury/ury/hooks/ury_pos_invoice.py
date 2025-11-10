@@ -86,9 +86,13 @@ def validate_customer(doc, method):
 def calculate_and_set_times(doc, method):
     doc.arrived_time = doc.creation
 
+    creation_time = datetime.strptime(str(doc.creation), "%Y-%m-%d %H:%M:%S")
+
     current_time_str = now()
-    
-    current_time = datetime.strptime(current_time_str, "%Y-%m-%d %H:%M:%S.%f")
+    try:
+        current_time = datetime.strptime(current_time_str, "%Y-%m-%d %H:%M:%S.%f")
+    except ValueError:
+        current_time = datetime.strptime(current_time_str, "%Y-%m-%d %H:%M:%S")
     
     time_difference = current_time - doc.creation
     
