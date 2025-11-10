@@ -313,12 +313,14 @@ export const useTableStore = defineStore("table", {
       const getPreviousOrder = {
         table: this.selectedTable,
       };
+      console.log(getPreviousOrder)
       this.call
         .get(
           "ury.ury.doctype.ury_order.ury_order.get_order_invoice",
           getPreviousOrder
         )
         .then((result) => {
+          console.log(result)
           this.previousOrder = result.message;
           this.invoicePrinted = this.previousOrder.invoice_printed;
           this.menu.comments= this.previousOrder.custom_comments;
